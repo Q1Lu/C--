@@ -21,7 +21,7 @@ class Suncake : public Dessert {
     public:
         void eat() override {
            cout << "Adding milk..." << endl;
-           Dessert::weight -= 20;
+           Dessert::eat();
         }
 };
 
