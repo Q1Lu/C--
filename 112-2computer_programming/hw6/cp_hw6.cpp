@@ -6,15 +6,14 @@ class Dessert
 {
 private:
     int weight;
-
 public:
     Dessert() : weight(100) {}
     ~Dessert() { cout << "Dessert destructor\n"; }
     int getWeight() const { return weight; }
     void eat()
     {
-        cout << "Eating...\n";
-        weight = (weight >= 20 ? weight - 20 : 0);
+        cout << "Eating...\n"; 
+        weight = ( weight >= 20 ? weight - 20 : 0); 
     }
 };
 
@@ -34,29 +33,28 @@ private:
 public:
     MySmartPointer(T *p) : ptr(p) {}
     ~MySmartPointer() { delete ptr; }
+    MySmartPointer(const MySmartPointer &other) = delete;
+    MySmartPointer& operator=(const MySmartPointer &other) = delete;
+    T &operator*() {return *ptr;}
     T *operator->() { return ptr; }
 };
 
 int main()
 {
-    MySmartPointer<Dessert> myMealPtr(new Dessert);
-    MySmartPointer<Pen> myPenPtr(new Pen);
+    MySmartPointer< Dessert > myMealPtr(new Dessert);
+    MySmartPointer< Pen > myPenPtr(new Pen);
     char choice;
-
     while (cin >> choice)
     {
         switch (choice)
         {
         case '1':
-            myMealPtr->eat();
+            (*myMealPtr).eat();
             assert(myMealPtr->getWeight() != 100);
             break;
         case '2':
             myPenPtr->write();
             break;
-        case '3':
-            // Destructors of Dessert and Pen will be called automatically when the program exits.
-            return 0;
         default:
             return 0;
         }
